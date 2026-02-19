@@ -5,8 +5,8 @@ export const profile = {
   location: "Monastir, Tunisia",
   degree: "MSc DevOps & SRE (in progress)",
   email: "ayoub.basraoui198@gmail.com",
-  linkedin: "https://linkedin.com/in/ayoub-nasraoui",
-  github: "https://github.com/ayoubnasraoui",
+  linkedin: "https://linkedin.com/in/ayoub-nasraoui-6b06b2236",
+  github: "https://github.com/Ayoub-45",
   status: "Open to opportunities",
 };
 
