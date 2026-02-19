@@ -105,3 +105,120 @@ export const projects = [
     link: null,
   },
 ];
+export const resume = {
+  summary:
+    "Junior DevOps and Site Reliability Engineer with a strong software engineering background and hands-on experience operating production-like systems through internships and real-world projects. Skilled in automation, CI/CD pipelines, cloud infrastructure, containerization, and observability. Passionate about building scalable, secure, and reliable systems, applying SRE principles such as monitoring, performance optimization, and reliability-driven design.",
+
+  education: [
+    {
+      degree: "Master's Degree – DevOps & Site Reliability Engineering",
+      school: "School of Digital Technologies",
+      date: "Expected June 2026",
+    },
+    {
+      degree: "Bachelor's Degree – Software Engineering",
+      school: "University of Monastir",
+      date: "2024",
+    },
+  ],
+
+  skills: [
+    {
+      label: "Cloud & DevOps",
+      items: ["AWS", "Docker", "Kubernetes", "Terraform", "Ansible", "GitHub Actions", "IaC"],
+    },
+    {
+      label: "Backend & Databases",
+      items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "Redis"],
+    },
+    {
+      label: "Monitoring & Observability",
+      items: ["Prometheus", "Grafana"],
+    },
+    {
+      label: "Programming",
+      items: ["JavaScript", "Python"],
+    },
+    {
+      label: "Systems",
+      items: ["Linux", "HTTP", "TCP/IP", "DNS"],
+    },
+  ],
+
+  experience: [
+    {
+      title: "DevOps & Software Engineering Intern",
+      company: "DocStreamSolutions",
+      date: "2024",
+      bullets: [
+        "Contributed to backend development and system architecture for a medical clinic management platform.",
+        "Participated in CI/CD automation and deployment workflows to improve release reliability.",
+        "Supported containerized application deployments and system stability.",
+        "Collaborated with cross-functional teams to enhance data handling and workflow reliability.",
+      ],
+    },
+    {
+      title: "Junior DevOps Engineer",
+      company: "Academic & Personal Projects",
+      date: "2024 – 2025",
+      bullets: [
+        "Automated infrastructure provisioning using Terraform and Ansible.",
+        "Containerized applications with Docker and supported Kubernetes deployments.",
+        "Implemented monitoring dashboards using Prometheus and Grafana.",
+        "Applied DevOps and SRE best practices with scalability and reliability in mind.",
+      ],
+    },
+  ],
+
+  projects: [
+    {
+      name: "Real-Time Notification System",
+      stack: "Python, Redis",
+      bullets: [
+        "Built a real-time notification system using Redis Pub/Sub.",
+        "Implemented priority-based message handling and TTL-based cleanup.",
+      ],
+    },
+    {
+      name: "Task Manager API",
+      stack: "Node.js, PostgreSQL, Redis",
+      bullets: [
+        "Developed a RESTful API with authentication and caching.",
+        "Improved API response time by approximately 40%.",
+      ],
+    },
+    {
+      name: "CI/CD Automation",
+      stack: "GitHub Actions, Docker",
+      bullets: [
+        "Designed CI/CD pipelines and automated build, test, and deployment workflows.",
+      ],
+    },
+  ],
+
+  languages: [
+    { lang: "Arabic", level: "Native" },
+    { lang: "English", level: "Fluent – B2" },
+    { lang: "French", level: "Intermediate" },
+    { lang: "German", level: "Beginner" },
+  ],
+
+  softSkills: [
+    "Problem-solving",
+    "Analytical thinking",
+    "Ownership mindset",
+    "Leadership",
+    "Resilience",
+    "Communication",
+    "Teamwork",
+  ],
+
+  interests: [
+    "Cloud Architecture",
+    "DevOps Automation",
+    "Site Reliability Engineering",
+    "Entrepreneurship",
+    "Writing",
+    "Psychology",
+  ],
+};

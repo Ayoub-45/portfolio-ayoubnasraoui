@@ -7,6 +7,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Divider from "./components/Divider";
+import Resume from "./components/Resume";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <Divider />
         <Experience />
         <Divider />
+        <Resume/>
         <Projects />
         <Divider />
         <Contact />
