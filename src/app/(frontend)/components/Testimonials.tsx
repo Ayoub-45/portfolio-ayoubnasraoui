@@ -40,7 +40,7 @@ export default async function Testimonials() {
             Testimonials
           </div>
           <h2 className="font-serif text-3xl md:text-5xl font-normal leading-tight">
-            Clients
+            Clients &nbsp;
             <span className="italic text-muted" style={{ color: 'var(--muted)' }}>
               reviews & feedback
             </span>
