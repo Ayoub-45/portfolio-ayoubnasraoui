@@ -11,6 +11,7 @@ import { Projects } from './collections/Projects'
 import { Skills } from './collections/Skills'
 import { Blog } from './collections/Blog'
 import { Users } from './collections/Users'
+import { Testimonials } from './collections/Testimonials'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,17 +21,8 @@ export default buildConfig({
     user: 'users', // Payload's default auth collection
   },
   // 2. REGISTER THEM INSIDE THESE ARRAYS
-  collections: [
-    Experiences,
-    Projects,
-    Skills,
-    Blog,
-    Users, // If you have a custom Users collection, keep it here
-    // If you have a default Users collection, keep it here too
-  ],
-  globals: [
-    Profile,
-  ],
+  collections: [Experiences, Projects, Skills, Blog, Users, Testimonials],
+  globals: [Profile],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',
   db: postgresAdapter({
