@@ -1,42 +1,37 @@
-"use client";
-import { useState, useEffect } from "react";
-import DarkModeToggle from "./DarkToggle";
+'use client'
+import { useState, useEffect } from 'react'
+import DarkModeToggle from './DarkToggle'
 
 const links = [
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-  { label: "Blog", href: "blog" },
-];
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Contact', href: '/#contact' },
+  { label: 'Blog', href: '/blog' },
+]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-5 transition-all duration-300 ${
-        scrolled ? "shadow-sm" : ""
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 h-16 px-8 flex items-center justify-between"
       style={{
-        background: "rgba(247,246,242,0.88)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid #e8e5df",
+        background: 'var(--bg)', // Matches your theme's background color variable
+        borderBottom: '1px solid var(--border)',
+        backdropFilter: 'blur(8px)', // Subtle premium blur style tip (optional)
       }}
     >
       <div className="flex items-center gap-4">
-
-      <DarkModeToggle/>
-      <span className="font-mono text-sm text-accent tracking-widest">
-        ayoub.nasraoui
-      </span>
+        <DarkModeToggle />
+        <span className="font-mono text-sm text-accent tracking-widest">ayoub.nasraoui</span>
       </div>
 
       {/* Desktop links */}
@@ -59,16 +54,22 @@ export default function Navbar() {
         onClick={() => setMenuOpen(!menuOpen)}
         aria-label="Toggle menu"
       >
-        <span className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? "opacity-0" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+        <span
+          className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
+        />
+        <span
+          className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? 'opacity-0' : ''}`}
+        />
+        <span
+          className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}
+        />
       </button>
 
       {/* Mobile menu */}
       {menuOpen && (
         <div
           className="absolute top-full left-0 right-0 py-4 flex flex-col gap-0 md:hidden"
-          style={{ background: "rgba(247,246,242,0.97)", borderBottom: "1px solid #e8e5df" }}
+          style={{ background: 'rgba(247,246,242,0.97)', borderBottom: '1px solid #e8e5df' }}
         >
           {links.map((l) => (
             <a
@@ -83,5 +84,5 @@ export default function Navbar() {
         </div>
       )}
     </nav>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.css'
 import { ThemeProvider } from './components/DarkToggle'
-
+import Navbar from './components/Navbar'
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
   title: 'Payload Blank Template',
@@ -32,7 +32,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       </head>
       <body suppressHydrationWarning>
         <ThemeProvider>
-        {children}
+          <Navbar />
+          {children}
         </ThemeProvider>
       </body>
     </html>

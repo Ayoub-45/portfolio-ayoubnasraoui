@@ -12,6 +12,7 @@ import { Skills } from './collections/Skills'
 import { Blog } from './collections/Blog'
 import { Users } from './collections/Users'
 import { Testimonials } from './collections/Testimonials'
+import { Tags } from './collections/Tags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +22,7 @@ export default buildConfig({
     user: 'users', // Payload's default auth collection
   },
   // 2. REGISTER THEM INSIDE THESE ARRAYS
-  collections: [Experiences, Projects, Skills, Blog, Users, Testimonials],
+  collections: [Experiences, Projects, Skills, Blog, Users, Testimonials, Tags],
   globals: [Profile],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',

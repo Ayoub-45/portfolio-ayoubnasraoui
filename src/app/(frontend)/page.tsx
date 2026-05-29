@@ -10,7 +10,6 @@ import Testimonials from './components/Testimonials'
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main>
         <Hero />
         <Divider />

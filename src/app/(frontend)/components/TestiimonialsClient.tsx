@@ -11,10 +11,9 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
   const [isFlashing, setIsFlashing] = useState(false)
 
   const nextSlide = () => {
-    // Trigger a quick flashy signal glow before changing records
     setIsFlashing(true)
     setCurrentIndex((prev) => (prev + 1) % initialData.length)
-    setTimeout(() => setIsFlashing(false), 400) // match signal duration
+    setTimeout(() => setIsFlashing(false), 400)
   }
 
   const prevSlide = () => {
@@ -23,13 +22,12 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
     setTimeout(() => setIsFlashing(false), 400)
   }
 
-  // AUTOMATIC SLIDER LOOP: Cycles every 5 seconds natively
   useEffect(() => {
     if (initialData.length <= 1 || viewMode !== 'ui') return
 
     const autoCycle = setInterval(() => {
       nextSlide()
-    }, 5000) // 5000ms execution window (5 seconds per slide)
+    }, 5000)
 
     return () => clearInterval(autoCycle)
   }, [currentIndex, initialData.length, viewMode])
@@ -70,8 +68,12 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
             <button
               type="button"
               onClick={() => setIsFormOpen(true)}
-              className="font-mono text-xs px-4 py-2 rounded-lg border transition-all flex items-center gap-2 cursor-pointer hover:opacity-90 text-white"
-              style={{ background: 'var(--accent)', borderColor: 'var(--accent)' }}
+              className="font-mono text-xs px-4 py-2 rounded-lg border transition-all flex items-center gap-2 cursor-pointer hover:opacity-90 active:scale-95"
+              style={{
+                background: 'var(--accent)',
+                borderColor: 'var(--accent)',
+                color: 'var(--surface, #ffffff)',
+              }}
             >
               <span>+$ write_review.exe</span>
             </button>
@@ -90,44 +92,45 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
       ) : viewMode === 'ui' ? (
         /* UI SLIDER PRESENTATION */
         <div className="relative w-full max-w-3xl mx-auto">
-          {/* Main Container Layer - Flash condition appended dynamically */}
           <div
             className={`rounded-xl border overflow-hidden transition-all duration-300 ${
               isFlashing
-                ? 'ring-2 ring-emerald-500/30 border-emerald-500 shadow-[0_0_25px_rgba(16,185,129,0.15)]'
+                ? 'ring-2 ring-[var(--accent)]/30 shadow-[0_0_25px_rgba(37,99,235,0.15)]'
                 : 'shadow-[0_4px_24px_rgba(0,0,0,0.02)]'
             }`}
             style={{
               background: 'var(--surface)',
-              borderColor: isFlashing ? 'rgba(16,185,129,0.5)' : 'var(--border)',
+              borderColor: isFlashing ? 'var(--accent)' : 'var(--border)',
             }}
           >
-            {/* Terminal Window Header */}
+            {/* Terminal Window Header - Swapped Green out for Theme Accent Blue */}
             <div
               className="flex items-center justify-between px-5 py-3 transition-colors"
               style={{
-                background: isFlashing ? '#e6f7ee' : '#f0ede8',
+                background: isFlashing ? 'transparent' : 'var(--border)',
                 borderBottom: '1px solid var(--border)',
               }}
             >
               <span
                 className="font-mono text-[10px] flex items-center gap-2"
-                style={{ color: isFlashing ? '#047857' : 'var(--muted)' }}
+                style={{ color: isFlashing ? 'var(--accent)' : 'var(--muted)' }}
               >
                 <span
-                  className={`w-1.5 h-1.5 rounded-full bg-emerald-500 ${isFlashing ? 'animate-ping' : 'animate-pulse'}`}
+                  className="w-1.5 h-1.5 rounded-full transition-colors"
+                  style={{ background: 'var(--accent)' }}
                 />
                 log_stream: user_review_{currentIndex + 1}_of_{initialData.length}.json
               </span>
               <div className="flex gap-1.5">
                 <span
-                  className={`w-2 h-2 rounded-full transition-colors ${isFlashing ? 'bg-emerald-400' : 'bg-gray-300'}`}
+                  className="w-2 h-2 rounded-full transition-colors"
+                  style={{ background: 'var(--accent)', opacity: isFlashing ? 1 : 0.4 }}
                 />
-                <span className="w-2 h-2 rounded-full bg-gray-300" />
+                <span className="w-2 h-2 rounded-full opacity-20 bg-current" />
               </div>
             </div>
 
-            {/* Overlapping CSS Grid Window - Preserves Slow Motion Cross-Fade */}
+            {/* Overlapping CSS Grid Window */}
             <div className="grid grid-cols-1 grid-rows-1 p-8 md:p-10 w-full overflow-hidden">
               {initialData.map((item, idx) => {
                 const stringId = String(item?.id || '')
@@ -167,7 +170,12 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
                         style={{ borderColor: 'var(--border)' }}
                       >
                         <div>
-                          <h4 className="font-sans font-medium text-sm">{item.name}</h4>
+                          <h4
+                            className="font-sans font-medium text-sm"
+                            style={{ color: 'var(--text)' }}
+                          >
+                            {item.name}
+                          </h4>
                           <p
                             className="font-mono text-[11px] mt-0.5"
                             style={{ color: 'var(--muted)' }}
@@ -175,12 +183,14 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
                             {item.role} {item.company && `@ ${item.company}`}
                           </p>
                         </div>
+                        {/* Verified Badge - Styled dynamically with blue system theme properties */}
                         <span
-                          className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded transition-all duration-300 ${
-                            isFlashing && isActive
-                              ? 'bg-emerald-500 text-white border-emerald-500'
-                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                          }`}
+                          className="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded transition-all duration-300 border"
+                          style={{
+                            background: isFlashing && isActive ? 'var(--accent)' : 'transparent',
+                            borderColor: isFlashing && isActive ? 'var(--accent)' : 'var(--border)',
+                            color: isFlashing && isActive ? 'var(--surface)' : 'var(--accent)',
+                          }}
                         >
                           Verified
                         </span>
@@ -194,7 +204,6 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
 
           {/* Slider Navigation Controls */}
           <div className="flex items-center justify-between mt-6 px-2">
-            {/* Dynamic Sliding Dots Progress Bar */}
             <div className="flex gap-1.5">
               {initialData.map((_, idx) => (
                 <button
@@ -205,18 +214,17 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
                     setCurrentIndex(idx)
                     setTimeout(() => setIsFlashing(false), 400)
                   }}
-                  className={`h-1 rounded-full transition-all duration-[600ms] cursor-pointer ${idx === currentIndex ? 'w-8 bg-emerald-500' : 'w-1.5'}`}
-                  style={{ background: idx === currentIndex ? '' : 'var(--border)' }}
+                  className={`h-1 rounded-full transition-all duration-[600ms] cursor-pointer ${idx === currentIndex ? 'w-8' : 'w-1.5'}`}
+                  style={{ background: idx === currentIndex ? 'var(--accent)' : 'var(--border)' }}
                 />
               ))}
             </div>
 
-            {/* Manual Navigation Arrows */}
             <div className="flex gap-2 font-mono text-xs">
               <button
                 type="button"
                 onClick={prevSlide}
-                className="w-9 h-9 flex items-center justify-center rounded-lg border transition-all cursor-pointer hover:bg-neutral-50 active:scale-95"
+                className="w-9 h-9 flex items-center justify-center rounded-lg border transition-all cursor-pointer hover:opacity-80 active:scale-95"
                 style={{
                   background: 'var(--surface)',
                   borderColor: 'var(--border)',
@@ -228,7 +236,7 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
               <button
                 type="button"
                 onClick={nextSlide}
-                className="w-9 h-9 flex items-center justify-center rounded-lg border transition-all cursor-pointer hover:bg-neutral-50 active:scale-95"
+                className="w-9 h-9 flex items-center justify-center rounded-lg border transition-all cursor-pointer hover:opacity-80 active:scale-95"
                 style={{
                   background: 'var(--surface)',
                   borderColor: 'var(--border)',
@@ -245,7 +253,11 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
         <FadeUp>
           <div
             className="rounded-xl overflow-hidden font-mono text-xs p-6 border leading-relaxed"
-            style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: '#4a4640' }}
+            style={{
+              background: 'var(--surface)',
+              borderColor: 'var(--border)',
+              color: 'var(--text)',
+            }}
           >
             <span style={{ color: 'var(--muted)' }}>{'['}</span>
             {initialData.map((item, idx) => (
@@ -253,26 +265,26 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
                 <span>{'{'}</span>
                 <div className="pl-6">
                   <div>
-                    <span style={{ color: 'var(--accent2)' }}>&quot;id&quot;</span>:{' '}
-                    <span style={{ color: 'var(--accent)' }}>
+                    <span style={{ color: 'var(--accent)' }}>&quot;id&quot;</span>:{' '}
+                    <span style={{ color: 'var(--text)' }}>
                       {typeof item.id === 'number' ? item.id : `&quot;${item.id}&quot;`}
                     </span>
                     ,
                   </div>
                   <div>
-                    <span style={{ color: 'var(--accent2)' }}>&quot;author&quot;</span>:{' '}
-                    <span style={{ color: 'var(--accent)' }}>&quot;{item.name}&quot;</span>,
+                    <span style={{ color: 'var(--accent)' }}>&quot;author&quot;</span>:{' '}
+                    <span style={{ color: 'var(--text)' }}>&quot;{item.name}&quot;</span>,
                   </div>
                   <div>
-                    <span style={{ color: 'var(--accent2)' }}>&quot;placement&quot;</span>:{' '}
-                    <span style={{ color: 'var(--accent)' }}>
+                    <span style={{ color: 'var(--accent)' }}>&quot;placement&quot;</span>:{' '}
+                    <span style={{ color: 'var(--text)' }}>
                       &quot;{item.role || 'Independent'} {item.company ? `@ ${item.company}` : ''}
                       &quot;
                     </span>
                     ,
                   </div>
                   <div>
-                    <span style={{ color: 'var(--accent2)' }}>&quot;log_content&quot;</span>:{' '}
+                    <span style={{ color: 'var(--accent)' }}>&quot;log_content&quot;</span>:{' '}
                     <span style={{ color: 'var(--text)' }}>&quot;{item.content}&quot;</span>
                   </div>
                 </div>
@@ -290,7 +302,7 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
         className={`fixed inset-0 z-50 transition-opacity duration-300 ${isFormOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       >
         <div
-          className="absolute inset-0 bg-black/20 backdrop-blur-xs"
+          className="absolute inset-0 bg-black/40 backdrop-blur-xs"
           onClick={() => setIsFormOpen(false)}
         />
 
@@ -300,7 +312,7 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
         >
           <div
             className="flex items-center justify-between px-6 py-4 border-b"
-            style={{ background: '#f0ede8', borderColor: 'var(--border)' }}
+            style={{ background: 'var(--border)', borderColor: 'var(--border)' }}
           >
             <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
@@ -312,7 +324,7 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
                 <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#29c941]" />
               </div>
-              <span className="font-mono text-xs font-semibold text-gray-600">
+              <span className="font-mono text-xs font-semibold" style={{ color: 'var(--text)' }}>
                 secure_input_pipe.sh
               </span>
             </div>
@@ -320,7 +332,9 @@ export default function TestimonialsClient({ initialData }: { initialData: any[]
 
           <div className="flex-1 overflow-y-auto p-8">
             <div className="mb-6">
-              <h3 className="font-serif text-xl mb-1">Establish Feedback Request</h3>
+              <h3 className="font-serif text-xl mb-1" style={{ color: 'var(--text)' }}>
+                Establish Feedback Request
+              </h3>
               <p className="font-mono text-[11px]" style={{ color: 'var(--muted)' }}>
                 // Transmit peer review metrics into the administrative queue pipeline.
               </p>

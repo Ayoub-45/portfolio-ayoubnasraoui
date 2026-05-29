@@ -1,19 +1,19 @@
-import { getPayload } from 'payload';
-import config from '@/payload.config';
-import FadeUp from "./FadeUp";
-import HeroButtons from "./HeroButtons"; // 👈 Import the client component here
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import FadeUp from './FadeUp'
+import HeroButtons from './HeroButtons' // Client component interaction layer
 
 export default async function Hero() {
   // 1. Initialize Payload Local Querying Engine
-  const payload = await getPayload({ config });
-  
+  const payload = await getPayload({ config })
+
   // 2. Fetch your profile data singleton out of PostgreSQL
-  const profile = await payload.findGlobal({ slug: 'profile' });
+  const profile = await payload.findGlobal({ slug: 'profile' })
 
   // 3. Prepare name parts safely for the stacked layout headline
-  const nameParts = profile.name ? profile.name.split(" ") : ["Ayoub", "Nasraoui"];
-  const firstName = nameParts[0];
-  const lastName = nameParts.slice(1).join(" ");
+  const nameParts = profile.name ? profile.name.split(' ') : ['Ayoub', 'Nasraoui']
+  const firstName = nameParts[0]
+  const lastName = nameParts.slice(1).join(' ')
 
   return (
     <section
@@ -27,19 +27,24 @@ export default async function Hero() {
             <div
               className="inline-flex items-center gap-2 text-xs font-mono tracking-widest uppercase px-4 py-1.5 rounded-full mb-7"
               style={{
-                color: "var(--accent)",
-                background: "var(--accent-light)",
-                border: "1px solid #c5dfd4",
+                color: 'var(--accent)',
+                /* FIX: Swapped hardcoded background and border with proper dim alpha layers for dark theme consistency */
+                background: 'var(--accent-dim, rgba(42,96,73,0.15))',
+                border: '1px solid var(--accent-border, rgba(42,96,73,0.3))',
               }}
             >
-              <span style={{ fontSize: "0.45rem" }}>●</span>
+              <span style={{ fontSize: '0.45rem' }}>●</span>
               {profile.status}
             </div>
           )}
 
           <h1
             className="font-serif leading-none mb-2"
-            style={{ fontSize: "clamp(2.8rem, 6vw, 4.25rem)", fontWeight: 400 }}
+            style={{
+              fontSize: 'clamp(2.8rem, 6vw, 4.25rem)',
+              fontWeight: 400,
+              color: 'var(--text)',
+            }}
           >
             {firstName}
             <br />
@@ -50,8 +55,8 @@ export default async function Hero() {
             <p
               className="font-serif italic mb-6"
               style={{
-                fontSize: "clamp(1rem, 2vw, 1.3rem)",
-                color: "var(--muted)",
+                fontSize: 'clamp(1rem, 2vw, 1.3rem)',
+                color: 'var(--muted)',
               }}
             >
               {profile.tagline}
@@ -61,14 +66,16 @@ export default async function Hero() {
           {profile.bio && (
             <p
               className="mb-9 leading-relaxed max-w-md"
-              style={{ fontSize: "1.0625rem", color: "var(--muted)" }}
+              style={{ fontSize: '1.0625rem', color: 'var(--muted)' }}
             >
               {profile.bio}
             </p>
           )}
 
-          {/* 👈 Clean interactive elements mounted cleanly inside Server tree */}
-          <HeroButtons />
+          {/* Interactive Action Blocks */}
+          <div className="mb-8">
+            <HeroButtons />
+          </div>
 
           <div className="flex flex-wrap gap-6">
             {profile.location && <MetaItem icon={<PinIcon />} label={profile.location} />}
@@ -79,101 +86,129 @@ export default async function Hero() {
         {/* Right Column: Dynamic Terminal Mock Card */}
         <FadeUp delay={200} className="hidden lg:block">
           <div
-            className="rounded-xl overflow-hidden"
+            className="rounded-xl overflow-hidden backdrop-blur-sm"
             style={{
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
-              boxShadow: "0 4px 32px rgba(0,0,0,0.06)",
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
             }}
           >
+            {/* Terminal Header Bar Panel */}
             <div
               className="flex items-center gap-2 px-4 py-3"
               style={{
-                background: "#f0ede8",
-                borderBottom: "1px solid var(--border)",
+                /* FIX: Shifted light-gray headers to adapt cleanly to an internal dark theme background frame */
+                background: 'var(--surface-header, rgba(255,255,255,0.03))',
+                borderBottom: '1px solid var(--border)',
               }}
             >
-              <div className="w-2.5 h-2.5 rounded-full bg-[#ff6058]" />
-              <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-              <div className="w-2.5 h-2.5 rounded-full bg-[#29c941]" />
-              <span className="font-mono text-xs text-muted mx-auto pr-8">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ff6058] opacity-80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] opacity-80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#29c941] opacity-80" />
+              <span
+                className="font-mono text-[11px] mx-auto pr-8"
+                style={{ color: 'var(--muted)' }}
+              >
                 ayoub@devops ~ zsh
               </span>
             </div>
-            <div className="p-6 font-mono text-xs leading-loose" style={{ color: "#4a4640" }}>
+
+            {/* Terminal Panel Content Workspace */}
+            <div className="p-6 font-mono text-xs leading-loose" style={{ color: 'var(--text)' }}>
               <Line prompt="ayoub@devops" cmd="whoami --json" />
-              <span style={{ color: "var(--muted)", paddingLeft: "1rem", display: "block" }}>{"{"}</span>
-              
-              <TermKV k="role" v={profile.tagline || "DevOps Engineer"} />
-              <TermKV k="location" v={profile.location || "Tunisia"} />
-              <TermKV k="status" v={profile.status || "open_to_work"} last />
-              
-              <span style={{ color: "var(--muted)", paddingLeft: "1rem", display: "block" }}>{"}"}</span>
+              <span style={{ color: 'var(--muted)', paddingLeft: '1rem', display: 'block' }}>
+                {'{'}
+              </span>
+              <TermKV k="role" v={profile.tagline || 'DevOps Engineer'} />
+              <TermKV k="location" v={profile.location || 'Tunisia'} />
+              <TermKV k="status" v={profile.status || 'open_to_work'} last />
+              <span style={{ color: 'var(--muted)', paddingLeft: '1rem', display: 'block' }}>
+                {'}'}
+              </span>
               <br />
               <Line prompt="ayoub@devops" cmd="docker ps" />
-              <div style={{ color: "var(--muted)", paddingLeft: "1rem" }}>
+              {/* FIX: Swapped hardcoded text colors out for var(--muted) elements so they remain perfectly readable */}
+              <div style={{ color: 'var(--muted)', paddingLeft: '1rem', opacity: 0.5 }}>
                 CONTAINER ID &nbsp; IMAGE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATUS
               </div>
-              <div style={{ color: "var(--muted)", paddingLeft: "1rem" }}>
-                a3f2c1d9e8b7 &nbsp; payload-cms:v3 &nbsp; Up 4 hours
+              <div style={{ color: 'var(--muted)', paddingLeft: '1rem', opacity: 0.85 }}>
+                a3f2c1d9e8b7 &nbsp; <span style={{ color: 'var(--accent)' }}>payload-cms:v3</span>{' '}
+                &nbsp; Up 4 hours
               </div>
-              <div style={{ color: "var(--muted)", paddingLeft: "1rem" }}>
-                b1e4d7a6c9f0 &nbsp; postgres-db:16 &nbsp; Up 2 days
+              <div style={{ color: 'var(--muted)', paddingLeft: '1rem', opacity: 0.85 }}>
+                b1e4d7a6c9f0 &nbsp; <span style={{ color: 'var(--accent)' }}>postgres-db:16</span>{' '}
+                &nbsp; Up 2 days
               </div>
               <br />
-              <span style={{ color: "var(--accent)" }}>ayoub@devops</span>
-              {" "}
-              <span className="cursor-blink" />
+              <span style={{ color: 'var(--accent)' }}>ayoub@devops</span>{' '}
+              <span className="inline-block w-1.5 h-3.5 bg-[var(--accent)] animate-pulse align-middle ml-0.5" />
             </div>
           </div>
         </FadeUp>
       </div>
     </section>
-  );
+  )
 }
 
 function Line({ prompt, cmd }: { prompt: string; cmd: string }) {
   return (
     <div>
-      <span style={{ color: "var(--accent)" }}>{prompt}</span>{" "}
-      <span style={{ color: "var(--text)" }}>{cmd}</span>
+      <span style={{ color: 'var(--accent)' }}>{prompt}</span>{' '}
+      <span style={{ color: 'var(--text)' }}>{cmd}</span>
     </div>
-  );
+  )
 }
 
 function TermKV({ k, v, last }: { k: string; v: string; last?: boolean }) {
   return (
-    <div style={{ color: "var(--muted)", paddingLeft: "2rem" }}>
-      <span style={{ color: "var(--accent2)" }}>&quot;{k}&quot;</span>:{" "}
-      <span style={{ color: "var(--accent)" }}>&quot;{v}&quot;</span>
-      {!last && ","}
+    <div style={{ color: 'var(--muted)', paddingLeft: '2rem' }}>
+      {/* FIX: Handled JSON syntax coloring beautifully with fallback text logic */}
+      <span style={{ color: 'var(--accent2, var(--accent))', filter: 'brightness(1.1)' }}>
+        &quot;{k}&quot;
+      </span>
+      : <span style={{ color: 'var(--accent)' }}>&quot;{v}&quot;</span>
+      {!last && ','}
     </div>
-  );
+  )
 }
 
 function MetaItem({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="flex items-center gap-1.5 text-sm" style={{ color: "var(--muted)" }}>
+    <div className="flex items-center gap-1.5 text-sm" style={{ color: 'var(--muted)' }}>
       {icon}
       {label}
     </div>
-  );
+  )
 }
 
 function PinIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
       <circle cx="12" cy="10" r="3" />
     </svg>
-  );
+  )
 }
 
 function GradIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
       <path d="M6 12v5c3 3 9 3 12 0v-5" />
     </svg>
-  );
+  )
 }

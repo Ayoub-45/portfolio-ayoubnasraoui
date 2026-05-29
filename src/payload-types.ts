@@ -73,6 +73,7 @@ export interface Config {
     blog: Blog;
     users: User;
     testimonials: Testimonial;
+    tags: Tag;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     blog: BlogSelect<false> | BlogSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -214,22 +216,54 @@ export interface Blog {
    * URL-friendly path identifier (e.g., my-first-devops-post)
    */
   slug: string;
-  category: string;
+  category: 'tech' | 'devops' | 'systems';
   publishDate: string;
   /**
    * A brief 1-2 sentence summary displayed on the main blog listing page.
    */
   excerpt: string;
-  content: {
-    paragraph: string;
-    id?: string | null;
-  }[];
-  tags?:
+  content: (
     | {
-        tag: string;
+        text: string;
         id?: string | null;
-      }[]
-    | null;
+        blockName?: string | null;
+        blockType: 'paragraphBlock';
+      }
+    | {
+        text: string;
+        level?: ('h2' | 'h3') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'headingBlock';
+      }
+    | {
+        items: {
+          item: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'listBlock';
+      }
+  )[];
+  /**
+   * Select or create global tags for this post.
+   */
+  tags?: (number | Tag)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name: string;
+  /**
+   * URL-friendly identifier for filtering (e.g., ci-cd)
+   */
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -322,6 +356,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -446,15 +484,35 @@ export interface BlogSelect<T extends boolean = true> {
   content?:
     | T
     | {
-        paragraph?: T;
-        id?: T;
+        paragraphBlock?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+        headingBlock?:
+          | T
+          | {
+              text?: T;
+              level?: T;
+              id?: T;
+              blockName?: T;
+            };
+        listBlock?:
+          | T
+          | {
+              items?:
+                | T
+                | {
+                    item?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
+  tags?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -490,6 +548,16 @@ export interface TestimonialsSelect<T extends boolean = true> {
   company?: T;
   content?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
