@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@payloadcms/next"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -30,7 +29,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "next.config.ts",
+    "globals.d.ts"
   ],
   "exclude": ["node_modules"]
 }
