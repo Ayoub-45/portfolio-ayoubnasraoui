@@ -5,12 +5,16 @@ FROM node:24-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+# 1. Add python3, make, and g++ so native modules (like sharp) can compile on Alpine
+RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+
+# 2. Tell sharp/vips not to look for global binaries if it's building from source
+ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
+
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
