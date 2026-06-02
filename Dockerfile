@@ -11,12 +11,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # Clean build variable flag for sharp
 ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
 
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN npm ci --ignore-scripts && npm cache clean --force
 
 # 3. Rebuild the source code
 FROM base AS builder
