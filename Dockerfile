@@ -11,7 +11,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # Clean build variable flag for sharp
 ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
 
-RUN npm ci --ignore-scripts && npm cache clean --force
+RUN npm install --ignore-scripts && npm cache clean --force
 
 # 3. Rebuild the source code
 FROM base AS builder
