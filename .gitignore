@@ -48,3 +48,5 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+portfolio_cms.sql
+/scripts/admin-panel.ts
