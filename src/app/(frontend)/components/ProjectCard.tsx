@@ -1,7 +1,5 @@
 // ProjectCard.tsx
 "use client"
-import posthog from 'posthog-js'
-
 export default function ProjectCard({ project }: { project: any }) {
   return (
             <div
@@ -69,7 +67,6 @@ export default function ProjectCard({ project }: { project: any }) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => posthog.capture('project_link_clicked', { project_title: project.title, project_link: project.link })}
                   className="inline-flex items-center gap-1 mt-4 text-xs font-medium transition-colors"
                   style={{ color: "var(--accent)" }}
                 >
