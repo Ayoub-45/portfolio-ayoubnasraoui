@@ -20,10 +20,6 @@ export default function TestimonialForm({ onSuccess }: { onSuccess?: () => void 
       if (!res.ok) throw new Error()
 
       setStatus('success')
-      posthog.capture('testimonial_submitted', {
-        has_role: !!formData.role,
-        has_company: !!formData.company,
-      })
       setFormData({ name: '', role: '', company: '', content: '' })
       if (onSuccess) onSuccess()
     } catch (err) {
