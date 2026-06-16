@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic'
-
+export const revalidate = 3600
 import { getPayloadClient } from '@/lib/payload'
 import MainBlogPostsClient from '../components/MainBlogPostsClient'
 

@@ -3,8 +3,16 @@ import './styles.css'
 import { ThemeProvider } from './components/DarkToggle'
 import Navbar from './components/Navbar'
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: "Ayoub DevOps | Portfolio",
+  description: "DevOps Engineer portfolio showcasing projects, blogs, and system design work.",
+  keywords: ["DevOps", "Kubernetes", "Cloud", "Next.js", "Payload CMS"],
+  openGraph: {
+    title: "Ayoub DevOps Portfolio",
+    description: "DevOps Engineer Portfolio",
+    url: "https://ayoub-devops.com",
+    siteName: "Ayoub DevOps",
+    type: "website",
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

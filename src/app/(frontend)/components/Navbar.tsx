@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import DarkModeToggle from './DarkToggle'
+import posthog from 'posthog-js'
 
 const links = [
   { label: 'Skills', href: '/#skills' },
@@ -40,6 +41,7 @@ export default function Navbar() {
           <li key={l.href}>
             <a
               href={l.href}
+              onClick={() => posthog.capture('nav_link_clicked', { label: l.label, href: l.href })}
               className="text-muted text-sm font-medium tracking-wide transition-colors hover:text-[#1a1814]"
             >
               {l.label}
@@ -75,7 +77,10 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false)
+                posthog.capture('nav_link_clicked', { label: l.label, href: l.href, source: 'mobile' })
+              }}
               className="px-8 py-3 text-sm font-medium text-muted hover:text-[#1a1814] hover:bg-[#f0ede8] transition-colors"
             >
               {l.label}

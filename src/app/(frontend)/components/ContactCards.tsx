@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import posthog from 'posthog-js'
 
 interface CardProps {
   label: string
@@ -31,6 +32,7 @@ export default function ContactCards({ contacts, email }: ContactCardsProps) {
               href={c.href}
               target={c.label !== 'Email' ? '_blank' : undefined}
               rel="noopener noreferrer"
+              onClick={() => posthog.capture('contact_link_clicked', { label: c.label, href: c.href })}
               className="flex flex-col items-center gap-1.5 rounded-xl px-8 py-6 min-w-[160px] transition-all duration-300 ease-out"
               style={{
                 background: 'var(--surface)',
@@ -69,6 +71,7 @@ export default function ContactCards({ contacts, email }: ContactCardsProps) {
         <div className="w-full flex justify-center">
           <a
             href={`mailto:${email}`}
+            onClick={() => posthog.capture('contact_link_clicked', { label: 'Email', href: `mailto:${email}`, source: 'main_button' })}
             className="inline-flex items-center gap-2 rounded-lg px-8 py-3.5 font-medium transition-all duration-200"
             style={{
               /* FIX: Swapped background states. Uses a sleek dark surface frame, lifting to accent on hover */

@@ -50,3 +50,4 @@ node_modules/
 /playwright/.cache/
 portfolio_cms.sql
 /scripts/admin-panel.ts
+.env.local

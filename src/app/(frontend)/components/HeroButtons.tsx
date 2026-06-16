@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import posthog from 'posthog-js'
 
 export default function HeroButtons() {
   const [isGetInTouchHovered, setIsGetInTouchHovered] = useState(false)
@@ -10,6 +11,7 @@ export default function HeroButtons() {
     <div className="flex flex-wrap gap-3 mb-6">
       <a
         href="#contact"
+        onClick={() => posthog.capture('hero_cta_clicked', { cta: 'get_in_touch' })}
         className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200"
         style={{
           /* 
@@ -37,6 +39,7 @@ export default function HeroButtons() {
       </a>
       <a
         href="#projects"
+        onClick={() => posthog.capture('hero_cta_clicked', { cta: 'view_projects' })}
         className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md text-sm font-medium transition-all"
         style={{
           background: 'transparent',
