@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import posthog from 'posthog-js'
 
 type Theme = 'light' | 'dark'
 
@@ -35,8 +34,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const next: Theme = theme === 'light' ? 'dark' : 'light'
     setTheme(next)
     localStorage.setItem('theme', next)
-    posthog.capture('theme_toggled', { theme: next })
-
     // Direct DOM mutation guarantees execution instantly
     document.documentElement.setAttribute('data-theme', next)
     if (next === 'dark') {
