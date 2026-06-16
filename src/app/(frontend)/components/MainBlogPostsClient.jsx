@@ -1,8 +1,6 @@
 'use client'
 import Link from 'next/link'
 import FadeUp from './FadeUp'
-import posthog from 'posthog-js'
-
 export default function MainBlogPostsClient({ posts }) {
   return (
     <div
