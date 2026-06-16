@@ -1,9 +1,8 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
+export const dynamic = 'force-dynamic'  
+import { getPayloadClient } from '@/lib/payload'
 import MainBlogPostsClient from '../components/MainBlogPostsClient' // adjust path to your MainBlogPostsClient file
 export default async function BlogPage() {
-  const payload = await getPayload({ config })
-
+    const payload = await getPayloadClient()
   // Fetch published blog posts sorted by newest date
   const postsData = await payload.find({
     collection: 'blog',

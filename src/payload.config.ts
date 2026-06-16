@@ -28,7 +28,7 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.PRODUCTION_DB || '',
+      connectionString: process.env.PRODUCTION_DB!,
     },
   }),
   typescript: {
