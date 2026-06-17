@@ -83,8 +83,8 @@ export default async function Hero() {
           </div>
         </FadeUp>
 
-        {/* Right Column: Dynamic Terminal Mock Card */}
-        <FadeUp delay={200} className="hidden lg:block">
+        {/* Right Column: Dynamic Terminal Mock Card - NOW VISIBLE ON MOBILE */}
+        <FadeUp delay={200} className="block mt-12 lg:mt-0">
           <div
             className="rounded-xl overflow-hidden backdrop-blur-sm"
             style={{
@@ -114,7 +114,8 @@ export default async function Hero() {
             </div>
 
             {/* Terminal Panel Content Workspace */}
-            <div className="p-6 font-mono text-xs leading-loose" style={{ color: 'var(--text)' }}>
+            {/* Added overflow-x-auto so the docker stats table doesn't break layout on tiny phone screens */}
+            <div className="p-6 font-mono text-xs leading-loose overflow-x-auto whitespace-nowrap lg:whitespace-normal" style={{ color: 'var(--text)' }}>
               <Line prompt="ayoub@devops" cmd="whoami --json" />
               <span style={{ color: 'var(--muted)', paddingLeft: '1rem', display: 'block' }}>
                 {'{'}
@@ -150,6 +151,7 @@ export default async function Hero() {
   )
 }
 
+// Keep your helper components (Line, TermKV, MetaItem, PinIcon, GradIcon) unchanged down here...
 function Line({ prompt, cmd }: { prompt: string; cmd: string }) {
   return (
     <div>
@@ -162,7 +164,6 @@ function Line({ prompt, cmd }: { prompt: string; cmd: string }) {
 function TermKV({ k, v, last }: { k: string; v: string; last?: boolean }) {
   return (
     <div style={{ color: 'var(--muted)', paddingLeft: '2rem' }}>
-      {/* FIX: Handled JSON syntax coloring beautifully with fallback text logic */}
       <span style={{ color: 'var(--accent2, var(--accent))', filter: 'brightness(1.1)' }}>
         &quot;{k}&quot;
       </span>
@@ -183,14 +184,7 @@ function MetaItem({ icon, label }: { icon: React.ReactNode; label: string }) {
 
 function PinIcon() {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
       <circle cx="12" cy="10" r="3" />
     </svg>
@@ -199,14 +193,7 @@ function PinIcon() {
 
 function GradIcon() {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
       <path d="M6 12v5c3 3 9 3 12 0v-5" />
     </svg>

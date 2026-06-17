@@ -21,70 +21,97 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 h-16 px-8 flex items-center justify-between"
-      style={{
-        background: 'var(--bg)', // Matches your theme's background color variable
-        borderBottom: '1px solid var(--border)',
-        backdropFilter: 'blur(8px)', // Subtle premium blur style tip (optional)
-      }}
-    >
-      <div className="flex items-center gap-4">
-        <DarkModeToggle />
-        <span className="font-mono text-sm text-accent tracking-widest">ayoub.nasraoui</span>
-      </div>
+    <>
+      <style>{`
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .mobile-menu { animation: fadeDown 0.18s ease; }
+      `}</style>
 
-      {/* Desktop links */}
-      <ul className="hidden md:flex gap-8 list-none">
-        {links.map((l) => (
-          <li key={l.href}>
-            <a
-              href={l.href}
-              className="text-muted text-sm font-medium tracking-wide transition-colors hover:text-[#1a1814]"
-            >
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Mobile hamburger */}
-      <button
-        className="md:hidden flex flex-col gap-1.5 cursor-pointer"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 h-16 px-6 sm:px-8 flex items-center justify-between"
+        style={{
+          background: 'var(--bg)',
+          borderBottom: '1px solid var(--border)',
+          backdropFilter: 'blur(8px)',
+          boxShadow: scrolled ? '0 2px 12px rgba(0,0,0,0.06)' : 'none',
+          transition: 'box-shadow 0.2s ease',
+        }}
       >
-        <span
-          className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
-        />
-        <span
-          className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? 'opacity-0' : ''}`}
-        />
-        <span
-          className={`block w-6 h-0.5 bg-[#1a1814] transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}
-        />
-      </button>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div
-          className="absolute top-full left-0 right-0 py-4 flex flex-col gap-0 md:hidden"
-          style={{ background: 'rgba(247,246,242,0.97)', borderBottom: '1px solid #e8e5df' }}
-        >
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => {
-                setMenuOpen(false)
-              }}
-              className="px-8 py-3 text-sm font-medium text-muted hover:text-[#1a1814] hover:bg-[#f0ede8] transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="flex items-center gap-4">
+          <DarkModeToggle />
+          <span className="font-mono text-sm text-accent tracking-widest">ayoub.nasraoui</span>
         </div>
-      )}
-    </nav>
+
+        {/* Desktop links */}
+        <ul className="hidden md:flex gap-8 list-none">
+          {links.map((l) => (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                className="text-muted text-sm font-medium tracking-wide transition-colors hover:text-[#1a1814]"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 cursor-pointer p-1 -mr-1 text-slate-800 dark:text-white transition-colors duration-200"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span
+            className="block w-6 h-0.5 transition-all duration-200"
+            style={{
+              background: 'var(--fg, currentColor)',
+              transform: menuOpen ? 'rotate(45deg) translateY(5px)' : 'none',
+            }}
+          />
+          <span
+            className="block w-6 h-0.5 transition-all duration-200"
+            style={{
+              background: 'var(--fg, currentColor)',
+              opacity: menuOpen ? 0 : 1,
+            }}
+          />
+          <span
+            className="block w-6 h-0.5 transition-all duration-200"
+            style={{
+              background: 'var(--fg, currentColor)',
+              transform: menuOpen ? 'rotate(-45deg) translateY(-5px)' : 'none',
+            }}
+          />
+        </button>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div
+            className="mobile-menu absolute top-full left-0 right-0 py-2 flex flex-col md:hidden"
+            style={{
+              background: 'var(--bg)',
+              borderBottom: '1px solid var(--border)',
+            }}
+          >
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className="px-6 sm:px-8 py-3 text-sm font-medium text-muted hover:text-[#1a1814] transition-colors"
+                style={{ borderTop: '1px solid var(--border)' }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </nav>
+    </>
   )
 }

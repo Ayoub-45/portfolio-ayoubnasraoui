@@ -72,7 +72,6 @@ export default function MainBlogPostsClient({ posts }) {
             <FadeUp key={post.id} delay={i * 100}>
               <Link
                 href={`/blog/${post.slug}`}
-                onClick={() => posthog.capture('blog_post_clicked', { post_title: post.title, post_slug: post.slug, category: computedCategory, reading_time: post.readingTime })}
                 className="group flex flex-col h-full rounded-xl p-6 transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   background: 'var(--surface)',
