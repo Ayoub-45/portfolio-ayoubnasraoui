@@ -97,14 +97,16 @@ export default function Navbar() {
         </button>
 
         {/* Mobile menu */}
-        {menuOpen && (
-          <div
-            className="mobile-menu absolute top-full left-0 right-0 py-2 flex flex-col md:hidden"
+      {menuOpen && (
+  <div
+            className="mobile-menu fixed top-16 left-0 right-0 md:hidden flex flex-col"
             style={{
-              background: 'var(--bg)',
-              borderBottom: '1px solid var(--border)',
-            }}
-          >
+      backgroundColor: 'var(--bg)',
+      borderBottom: '1px solid var(--border)',
+      boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+      zIndex: 60,
+    }}
+  >
             {links.map((l) => (
               <a
                 key={l.href}
@@ -112,7 +114,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="px-6 sm:px-8 py-3 text-sm font-medium transition-colors opacity-80 hover:opacity-100"
                 style={{ 
-                  color: 'var(--fg, currentColor)',
+                  color: 'var(--fg)',
                   borderTop: '1px solid var(--border)' 
                 }}
               >

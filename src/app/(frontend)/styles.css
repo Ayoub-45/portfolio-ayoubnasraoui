@@ -21,6 +21,8 @@
   --accent-dim: rgba(37, 99, 235, 0.08); /* Soft blue backing tint for status tags */
   --accent-border: rgba(37, 99, 235, 0.2); /* Light blue micro-outline tracking state */
   --accent-glow: rgba(37, 99, 235, 0.06); /* Crisp ambient hover shadow drop */
+  --bg: #ffffff;
+  --border: #e5e7eb;
 }
 
 /* Dark Theme State Mapping (Keeps your clean terminal/dark view unchanged) */
@@ -29,7 +31,6 @@
   --surface: #131b2e;
   --surface-header: rgba(255, 255, 255, 0.03);
   --border: #1e293b;
-
   --text: #f8fafc;
   --muted: #94a3b8;
   --accent: #2563eb; /* Vivid Slate Blue main brand accent (blue-600) */
@@ -47,11 +48,13 @@
 html.dark,
 [data-theme='dark'] {
   --bg: #0f172a;
+  --fg: #f8fafc;
+  /* <-- ADD THIS */
   --surface: #1e293b;
-  --text: #f8fafc; /* Clean off-white text for dark mode readability */
+  --text: #f8fafc;
   --muted: #94a3b8;
   --border: #334155;
-  --accent: #2563eb; /* Vivid Slate Blue main brand accent (blue-600) */
+  --accent: #2563eb;
 }
 
 html {
