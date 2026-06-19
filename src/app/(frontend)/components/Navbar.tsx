@@ -37,12 +37,18 @@ export default function Navbar() {
           borderBottom: '1px solid var(--border)',
           backdropFilter: 'blur(8px)',
           boxShadow: scrolled ? '0 2px 12px rgba(0,0,0,0.06)' : 'none',
-          transition: 'box-shadow 0.2s ease',
+          transition: 'box-shadow 0.2s ease, background 0.2s ease',
         }}
       >
         <div className="flex items-center gap-4">
           <DarkModeToggle />
-          <span className="font-mono text-sm text-accent tracking-widest">ayoub.nasraoui</span>
+          {/* Changed text-accent to use var(--fg) or a fallback currentColor to ensure visibility */}
+          <span 
+            className="font-mono text-sm tracking-widest"
+            style={{ color: 'var(--fg, currentColor)' }}
+          >
+            ayoub.nasraoui
+          </span>
         </div>
 
         {/* Desktop links */}
@@ -51,7 +57,9 @@ export default function Navbar() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-muted text-sm font-medium tracking-wide transition-colors hover:text-[#1a1814]"
+                {/* Removed text-muted and hardcoded hover hex. Added variable styling instead. */}
+                className="text-sm font-medium tracking-wide transition-colors opacity-80 hover:opacity-100"
+                style={{ color: 'var(--fg, currentColor)' }}
               >
                 {l.label}
               </a>
@@ -61,7 +69,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 cursor-pointer p-1 -mr-1 text-slate-800 dark:text-white transition-colors duration-200"
+          className="md:hidden flex flex-col gap-1.5 cursor-pointer p-1 -mr-1 transition-colors duration-200"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
@@ -103,8 +111,12 @@ export default function Navbar() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
-                className="px-6 sm:px-8 py-3 text-sm font-medium text-muted hover:text-[#1a1814] transition-colors"
-                style={{ borderTop: '1px solid var(--border)' }}
+                {/* Made mobile links scale gracefully with opacity instead of static colors */}
+                className="px-6 sm:px-8 py-3 text-sm font-medium transition-colors opacity-80 hover:opacity-100"
+                style={{ 
+                  color: 'var(--fg, currentColor)',
+                  borderTop: '1px solid var(--border)' 
+                }}
               >
                 {l.label}
               </a>
