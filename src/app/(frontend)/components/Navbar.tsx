@@ -57,7 +57,6 @@ export default function Navbar() {
             <li key={l.href}>
               <a
                 href={l.href}
-                {/* Removed text-muted and hardcoded hover hex. Added variable styling instead. */}
                 className="text-sm font-medium tracking-wide transition-colors opacity-80 hover:opacity-100"
                 style={{ color: 'var(--fg, currentColor)' }}
               >
@@ -111,7 +110,6 @@ export default function Navbar() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
-                {/* Made mobile links scale gracefully with opacity instead of static colors */}
                 className="px-6 sm:px-8 py-3 text-sm font-medium transition-colors opacity-80 hover:opacity-100"
                 style={{ 
                   color: 'var(--fg, currentColor)',
