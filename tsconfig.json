@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "ignoreDeprecations": "6.0",
-    "baseUrl":".",
+    "baseUrl": ".",
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -32,7 +32,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "next.config.ts",
-    "globals.d.ts"
+    "globals.d.ts",
+    "src/app/(frontend)/components/MainBlogPostsClient.jsx"
   ],
   "exclude": ["node_modules"]
 }

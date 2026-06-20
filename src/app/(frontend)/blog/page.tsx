@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 import { getPayloadClient } from '@/lib/payload'
-import MainBlogPostsClient from '../components/MainBlogPostsClient'
+import MainBlogPostsClient from '../components/MainBlogPostsClient.jsx'
 
 function calculateReadingTime(content: any): string {
   let totalWords = 0

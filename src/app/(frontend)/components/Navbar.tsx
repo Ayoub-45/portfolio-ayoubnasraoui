@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 import DarkModeToggle from './DarkToggle'
 
 const links = [
-  { label: 'Skills', href: '/#skills' },
-  { label: 'Experience', href: '/#experience' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
   { label: 'Projects', href: '/#projects' },
   { label: 'Contact', href: '/#contact' },
   { label: 'Blog', href: '/blog' },
@@ -43,7 +43,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <DarkModeToggle />
           {/* Changed text-accent to use var(--fg) or a fallback currentColor to ensure visibility */}
-          <span 
+          <span
             className="font-mono text-sm tracking-widest"
             style={{ color: 'var(--fg, currentColor)' }}
           >
@@ -97,25 +97,25 @@ export default function Navbar() {
         </button>
 
         {/* Mobile menu */}
-      {menuOpen && (
-  <div
+        {menuOpen && (
+          <div
             className="mobile-menu fixed top-16 left-0 right-0 md:hidden flex flex-col"
             style={{
-      backgroundColor: 'var(--bg)',
-      borderBottom: '1px solid var(--border)',
-      boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-      zIndex: 60,
-    }}
-  >
+              backgroundColor: 'var(--bg)',
+              borderBottom: '1px solid var(--border)',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              zIndex: 60,
+            }}
+          >
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
                 className="px-6 sm:px-8 py-3 text-sm font-medium transition-colors opacity-80 hover:opacity-100"
-                style={{ 
+                style={{
                   color: 'var(--fg)',
-                  borderTop: '1px solid var(--border)' 
+                  borderTop: '1px solid var(--border)',
                 }}
               >
                 {l.label}
