@@ -14,6 +14,7 @@ import { Testimonials } from './collections/Testimonials'
 import { Tags } from './collections/Tags'
 import { Inquiries } from './collections/Inqueries'
 import { Services } from './collections/Services'
+import { Media } from './collections/Media'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -32,6 +33,7 @@ export default buildConfig({
     Tags,
     Inquiries,
     Services,
+    Media,
   ],
   globals: [Profile],
   editor: lexicalEditor({}),

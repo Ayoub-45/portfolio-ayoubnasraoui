@@ -13,7 +13,7 @@ const workflowSteps = [
     title: 'You explain your setup or problem',
     description: 'Tell me what you’re working on (VPS, Docker app, CI/CD, or AWS setup).',
     badge: 'Discovery',
-    image: '/images/discovery.jpg',
+    image: '/images/discovery.png',
   },
   {
     step: '2',
@@ -21,7 +21,7 @@ const workflowSteps = [
     description:
       'I review your system and identify bottlenecks, security risks, and optimization opportunities.',
     badge: 'Audit',
-    image: '/images/audit.jpg',
+    image: '/images/audit.png',
   },
   {
     step: '3',
@@ -29,7 +29,7 @@ const workflowSteps = [
     description:
       'I configure, deploy, automate, or fix your infrastructure using modern DevOps practices.',
     badge: 'Execution',
-    image: '/images/execution.jpg',
+    image: '/images/execution.png',
   },
   {
     step: '4',
@@ -37,7 +37,7 @@ const workflowSteps = [
     description:
       'Clear documentation and handover notes ensure your team can maintain everything confidently.',
     badge: 'Handover',
-    image: '/images/handover.jpg',
+    image: '/images/handover.png',
   },
 ] as const
 
