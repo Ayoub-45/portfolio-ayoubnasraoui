@@ -1,19 +1,9 @@
 'use client'
-
-import Link from 'next/link'
+import type { Service } from '@/payload-types'
 import FadeUp from './FadeUp'
 
-interface ServiceItem {
-  id: string
-  title: string
-  priceRange: string
-  description: string
-  features: { id: string; feature: string }[]
-  deliveryTime: string
-}
-
 interface ServicesClientProps {
-  services: ServiceItem[]
+  services: Service[]
 }
 
 export default function ServicesClient({ services }: ServicesClientProps) {
