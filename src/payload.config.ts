@@ -22,7 +22,17 @@ export default buildConfig({
     user: 'users', // Payload's default auth collection
   },
   // 2. REGISTER THEM INSIDE THESE ARRAYS
-  collections: [Experiences, Projects, Skills, Blog, Users, Testimonials, Tags, Inquiries, Services],
+  collections: [
+    Experiences,
+    Projects,
+    Skills,
+    Blog,
+    Users,
+    Testimonials,
+    Tags,
+    Inquiries,
+    Services,
+  ],
   globals: [Profile],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'YOUR_SECRET_HERE',
@@ -31,11 +41,11 @@ export default buildConfig({
       connectionString: process.env.PRODUCTION_DB!,
     },
   }),
-email: nodemailerAdapter({
+  email: nodemailerAdapter({
     defaultFromAddress: 'noreply@ayoub-devops.com',
     defaultFromName: 'Ayoub DevOps',
     transportOptions: {
-      host: 'smtp.zoho.com',
+      host: process.env.HOST,
       port: 587,
       auth: {
         user: process.env.ZOHO_EMAIL,
