@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import DarkModeToggle from './DarkToggle'
 
 const links = [
-  { label: 'Home', href: '/' }, 7
+  { label: 'Home', href: '/' },
   { label: 'How it works', href: '/how-it-works' },
   { label: 'Services', href: '/services' },
   { label: 'Projects', href: '/#projects' },
