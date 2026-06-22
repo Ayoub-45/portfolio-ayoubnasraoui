@@ -47,10 +47,11 @@ function WorkflowStep({
   priority: boolean
 }) {
   // Point dynamically to your new API endpoint using the filename from the database
-  const dynamicImageSrc = item.image?.filename
-    ? `/api/media/${item.image.filename}`
-    : '/images/placeholder.png' // Safe fallback image if empty
+  // 1. Safely extract the pre-built URL path straight from Payload's data object
+  const rawUrl = item.image?.url || (typeof item.image === 'object' ? item.image?.url : null)
 
+  // 2. Fall back cleanly if it doesn't exist so Next.js never sees an empty value
+  const dynamicImageSrc = rawUrl || 'https://placehold.co/600x400/png?text=No+Image'
   return (
     <article
       className={`flex flex-col items-center gap-10 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
@@ -59,7 +60,7 @@ function WorkflowStep({
         <div className="group relative aspect-[16/10] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--muted)]/5">
           <Image
             src={dynamicImageSrc}
-            alt={item.image?.alt || item.title}
+            alt={item.image?.alt || item.title || 'Portfolio Media'}
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, 50vw"
