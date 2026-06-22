@@ -83,13 +83,6 @@ function WorkflowStep({
         <p className="mb-6 max-w-md text-base leading-relaxed text-[var(--muted)] sm:text-lg">
           {item.description}
         </p>
-
-        <Link
-          href="/#inquiry-section"
-          className="inline-flex w-fit items-center gap-2 border-b border-[var(--text)] pb-1 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-        >
-          Initiate this stage →
-        </Link>
       </div>
     </article>
   )
