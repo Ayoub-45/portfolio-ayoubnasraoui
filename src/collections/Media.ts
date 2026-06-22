@@ -3,8 +3,14 @@ import path from 'node:path'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  admin: {
+    useAsTitle: 'alt', // Add this
+  },
   access: {
     read: () => true,
+    create: () => true, // Add this
+    update: () => true, // Add this
+    delete: () => true, // Add this
   },
   fields: [
     {
