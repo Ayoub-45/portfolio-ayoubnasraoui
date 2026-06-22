@@ -39,6 +39,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.PRODUCTION_DB!,
     },
+    push: false,
   }),
   email: nodemailerAdapter({
     defaultFromAddress: 'noreply@ayoub-devops.com',
