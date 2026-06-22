@@ -1,7 +1,7 @@
 // src/collections/Media.ts
 import type { CollectionConfig } from 'payload'
 import path from 'node:path'
-const mediaDir = path.resolve(import.meta.dirname, 'media')
+
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
@@ -15,7 +15,7 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: path.resolve(mediaDir, '../../media'), // resolves to /opt/render/project/src/media in production
+    staticDir: path.resolve(process.cwd(), '..', '..', 'media'), // recheck this path — see note below
     imageSizes: [
       { name: 'thumbnail', width: 400 },
       { name: 'card', width: 768 },

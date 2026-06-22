@@ -15,9 +15,6 @@ import { Tags } from './collections/Tags'
 import { Inquiries } from './collections/Inqueries'
 import { Services } from './collections/Services'
 import { Media } from './collections/Media'
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
-
 export default buildConfig({
   admin: {
     user: 'users', // Payload's default auth collection
@@ -56,6 +53,6 @@ export default buildConfig({
     },
   }),
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(process.cwd(), 'payload-types.ts'),
   },
 })
