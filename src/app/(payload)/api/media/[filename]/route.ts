@@ -1,10 +1,14 @@
-// app/api/media/[filename]/route.ts
+// src/app/(payload)/api/media/[filename]/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'node:fs'
 import path from 'node:path'
 
-export async function GET(request: NextRequest, { params }: { params: { filename: string } }) {
-  const filename = params.filename
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ filename: string }> }, // Change this to a Promise
+) {
+  // Await the params object before destructuring
+  const { filename } = await params
 
   // Define the exact path matching your Payload config
   const storageDir = '/opt/render/project/src/media'
@@ -30,7 +34,7 @@ export async function GET(request: NextRequest, { params }: { params: { filename
     return new NextResponse(fileBuffer, {
       headers: {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=31536000, immutable', // Optimize delivery
+        'Cache-Control': 'public, max-age=31536000, immutable',
       },
     })
   } catch (error) {
