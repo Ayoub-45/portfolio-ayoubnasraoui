@@ -13,7 +13,6 @@ const workflowSteps = [
     title: 'You explain your setup or problem',
     description: 'Tell me what you’re working on (VPS, Docker app, CI/CD, or AWS setup).',
     badge: 'Discovery',
-    image: '/images/discovery.png',
   },
   {
     step: '2',
@@ -21,7 +20,6 @@ const workflowSteps = [
     description:
       'I review your system and identify bottlenecks, security risks, and optimization opportunities.',
     badge: 'Audit',
-    image: '/images/audit.png',
   },
   {
     step: '3',
@@ -29,7 +27,6 @@ const workflowSteps = [
     description:
       'I configure, deploy, automate, or fix your infrastructure using modern DevOps practices.',
     badge: 'Execution',
-    image: '/images/execution.png',
   },
   {
     step: '4',
@@ -37,7 +34,6 @@ const workflowSteps = [
     description:
       'Clear documentation and handover notes ensure your team can maintain everything confidently.',
     badge: 'Handover',
-    image: '/images/handover.png',
   },
 ] as const
 
@@ -46,27 +42,29 @@ function WorkflowStep({
   reverse,
   priority,
 }: {
-  item: (typeof workflowSteps)[number]
+  item: any // Use your dynamic collection item typing here
   reverse: boolean
   priority: boolean
 }) {
+  // Point dynamically to your new API endpoint using the filename from the database
+  const dynamicImageSrc = item.image?.filename
+    ? `/api/media/${item.image.filename}`
+    : '/images/placeholder.png' // Safe fallback image if empty
+
   return (
     <article
-      className={`flex flex-col items-center gap-10 ${
-        reverse ? 'md:flex-row-reverse' : 'md:flex-row'
-      }`}
+      className={`flex flex-col items-center gap-10 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
     >
       <div className="w-full md:w-1/2">
         <div className="group relative aspect-[16/10] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--muted)]/5">
           <Image
-            src={item.image}
-            alt={item.title}
+            src={dynamicImageSrc}
+            alt={item.image?.alt || item.title}
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-
           <div className="absolute left-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--text)] text-sm font-bold text-[var(--bg)]">
             {item.step}
           </div>
