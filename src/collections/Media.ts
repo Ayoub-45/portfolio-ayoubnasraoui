@@ -14,7 +14,7 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: '/opt/render/project/src/media',
+    staticDir: '/opt/render/project/src/media', //add storage path for media files
     imageSizes: [
       { name: 'thumbnail', width: 400 },
       { name: 'card', width: 768 },
