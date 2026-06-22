@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic'
 export const revalidate = 3600
 import { getPayloadClient } from '@/lib/payload'
 import MainBlogPostsClient from '../components/MainBlogPostsClient.jsx'
@@ -8,18 +7,11 @@ function calculateReadingTime(content: any): string {
 
   if (Array.isArray(content)) {
     content.forEach((block: any) => {
-      if (
-        block.blockType === 'paragraphBlock' ||
-        block.blockType === 'headingBlock'
-      ) {
-        totalWords += block.text
-          ? block.text.split(/\s+/).filter(Boolean).length
-          : 0
+      if (block.blockType === 'paragraphBlock' || block.blockType === 'headingBlock') {
+        totalWords += block.text ? block.text.split(/\s+/).filter(Boolean).length : 0
       } else if (block.blockType === 'listBlock' && Array.isArray(block.items)) {
         block.items.forEach((itemObj: any) => {
-          totalWords += itemObj.item
-            ? itemObj.item.split(/\s+/).filter(Boolean).length
-            : 0
+          totalWords += itemObj.item ? itemObj.item.split(/\s+/).filter(Boolean).length : 0
         })
       }
     })
@@ -44,7 +36,7 @@ export default async function BlogPage() {
     },
   })
 
-  const posts = postsData.docs.map((post:any) => ({
+  const posts = postsData.docs.map((post: any) => ({
     ...post,
     readingTime: calculateReadingTime(post.content),
   }))
