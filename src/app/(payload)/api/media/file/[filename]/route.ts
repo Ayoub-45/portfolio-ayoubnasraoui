@@ -17,6 +17,7 @@ export async function GET(
   try {
     // 1. Check if the file actually exists on Render's disk
     if (!fs.existsSync(filePath)) {
+      console.error(`[Media API] ❌ File does not exist at: ${filePath}`)
       return new NextResponse('Image Not Found', { status: 404 })
     }
 
