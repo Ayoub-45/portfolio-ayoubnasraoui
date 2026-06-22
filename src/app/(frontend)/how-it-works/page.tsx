@@ -49,7 +49,7 @@ function WorkflowStep({
   // Point dynamically to your new API endpoint using the filename from the database
   // 1. Safely extract the pre-built URL path straight from Payload's data object
   const rawUrl = item.image?.url || (typeof item.image === 'object' ? item.image?.url : null)
-
+  console.log(rawUrl)
   // 2. Fall back cleanly if it doesn't exist so Next.js never sees an empty value
   const dynamicImageSrc = rawUrl || 'https://placehold.co/600x400/png?text=No+Image'
   return (

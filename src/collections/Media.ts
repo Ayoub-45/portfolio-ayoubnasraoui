@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-import path from 'node:path'
 
 export const Media: CollectionConfig = {
   slug: 'media',

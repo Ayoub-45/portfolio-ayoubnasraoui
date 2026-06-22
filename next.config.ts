@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'ayoub-devops.com', // Replace with your live Render app URL
         pathname: '/api/media/**',
       },
