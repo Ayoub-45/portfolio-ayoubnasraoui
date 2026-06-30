@@ -1,6 +1,9 @@
 # 1. Swap from node:24-alpine to node:24-slim (Debian)
 FROM node:24-slim AS base
 
+ARG PRODUCTIONDB
+ENV PRODUCTIONDB=$PRODUCTIONDB
+
 # 2. Setup the deps stage using standard Debian architecture
 FROM base AS deps
 WORKDIR /app
@@ -17,7 +20,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
 # Payload requires production env vars or dummy strings during build
 ENV NODE_ENV production
 

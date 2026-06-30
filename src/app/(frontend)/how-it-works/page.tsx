@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getPayload } from 'payload'
@@ -12,6 +11,7 @@ export const metadata = {
     'A simple, transparent process to get your VPS server, Docker app, CI/CD pipeline, or AWS setup fixed or built.',
 }
 
+export const dynamic = 'force-dynamic'
 function WorkflowStep({
   item,
   reverse,
