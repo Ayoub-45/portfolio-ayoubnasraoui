@@ -1,57 +1,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import type { Media } from '@/payload-types'
+import { WorkflowStep as WorkflowStepType } from 'payload-types'
+const payload = await getPayload({ config })
 export const metadata = {
   title: 'How It Works - Infrastructure & DevOps Solutions',
   description:
     'A simple, transparent process to get your VPS server, Docker app, CI/CD pipeline, or AWS setup fixed or built.',
 }
 
-const workflowSteps = [
-  {
-    step: '1',
-    title: 'You explain your setup or problem',
-    description: 'Tell me what you’re working on (VPS, Docker app, CI/CD, or AWS setup).',
-    badge: 'Discovery',
-  },
-  {
-    step: '2',
-    title: 'I analyze your infrastructure',
-    description:
-      'I review your system and identify bottlenecks, security risks, and optimization opportunities.',
-    badge: 'Audit',
-  },
-  {
-    step: '3',
-    title: 'I implement the solution',
-    description:
-      'I configure, deploy, automate, or fix your infrastructure using modern DevOps practices.',
-    badge: 'Execution',
-  },
-  {
-    step: '4',
-    title: 'You receive complete documentation',
-    description:
-      'Clear documentation and handover notes ensure your team can maintain everything confidently.',
-    badge: 'Handover',
-  },
-] as const
-
 function WorkflowStep({
   item,
   reverse,
   priority,
 }: {
-  item: any // Use your dynamic collection item typing here
+  item: WorkflowStepType
   reverse: boolean
   priority: boolean
 }) {
-  // Point dynamically to your new API endpoint using the filename from the database
-  // 1. Safely extract the pre-built URL path straight from Payload's data object
-  const rawUrl = item.image?.url || (typeof item.image === 'object' ? item.image?.url : null)
-  console.log(rawUrl)
-  // 2. Fall back cleanly if it doesn't exist so Next.js never sees an empty value
-  const dynamicImageSrc = rawUrl || 'https://placehold.co/600x400/png?text=No+Image'
+  const image = item.image as Media // safe cast since depth:1 resolves it
+  const dynamicImageSrc = image?.url || 'https://placehold.co/600x400/png?text=No+Image'
+  const altText = image?.alt || item.title
   return (
     <article
       className={`flex flex-col items-center gap-10 ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
@@ -60,7 +31,7 @@ function WorkflowStep({
         <div className="group relative aspect-[16/10] overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--muted)]/5">
           <Image
             src={dynamicImageSrc}
-            alt={item.image?.alt || item.title || 'Portfolio Media'}
+            alt={altText}
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -87,7 +58,13 @@ function WorkflowStep({
   )
 }
 
-export default function HowItWorksPage() {
+export default async function HowItWorksPage() {
+  const payload = await getPayload({ config })
+  const { docs: workflowSteps } = await payload.find({
+    collection: 'workflow-steps',
+    depth: 1,
+    sort: 'order',
+  })
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       {/* Hero */}

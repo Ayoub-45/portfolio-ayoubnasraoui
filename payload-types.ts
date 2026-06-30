@@ -77,6 +77,7 @@ export interface Config {
     inquiries: Inquiry;
     services: Service;
     media: Media;
+    'workflow-steps': WorkflowStep;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'workflow-steps': WorkflowStepsSelect<false> | WorkflowStepsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -387,6 +389,21 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "workflow-steps".
+ */
+export interface WorkflowStep {
+  id: number;
+  step: string;
+  title: string;
+  description: string;
+  badge: string;
+  image: number | Media;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -448,6 +465,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'workflow-steps';
+        value: number | WorkflowStep;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -720,6 +741,20 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "workflow-steps_select".
+ */
+export interface WorkflowStepsSelect<T extends boolean = true> {
+  step?: T;
+  title?: T;
+  description?: T;
+  badge?: T;
+  image?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

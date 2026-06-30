@@ -15,6 +15,7 @@ import { Tags } from './collections/Tags'
 import { Inquiries } from './collections/Inqueries'
 import { Services } from './collections/Services'
 import { Media } from './collections/Media'
+import { WorkflowSteps } from './collections/WorkflowSteps'
 export default buildConfig({
   admin: {
     user: 'users', // Payload's default auth collection
@@ -31,6 +32,7 @@ export default buildConfig({
     Inquiries,
     Services,
     Media,
+    WorkflowSteps,
   ],
   globals: [Profile],
   editor: lexicalEditor({}),
