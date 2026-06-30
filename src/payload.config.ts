@@ -15,7 +15,6 @@ import { Inquiries } from './collections/Inqueries'
 import { Services } from './collections/Services'
 import { Media } from './collections/Media'
 import { WorkflowSteps } from './collections/WorkflowSteps'
-console.log('PRODUCTION_DB =', process.env.PRODUCTION_DB)
 export default buildConfig({
   admin: {
     user: 'users', // Payload's default auth collection

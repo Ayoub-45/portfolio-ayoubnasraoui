@@ -10,6 +10,13 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 # Clean build variable flag for sharp
 ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
+ENV NODE_ENV production
+ENV PRODUCTION_DB=$PRODUCTION_DB
+ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
+ENV SMTP_HOST=$SMTP_HOST
+ENV ZOHO_EMAIL=$ZOHO_EMAIL
+ENV ZOHO_APP_PASSWORD=$ZOHO_APP_PASSWORD
+ENV MAIL_PORT=$MAIL_PORT
 
 RUN npm install --ignore-scripts --legacy-peer-deps && npm cache clean --force
 # 3. Rebuild the source code
