@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FadeUp from './FadeUp'
-
+export const dynamic = 'force-dynamic'
 export default async function Experience() {
   const payload = await getPayload({ config })
   const experienceData = await payload.find({ collection: 'experiences', sort: '-createdAt' })
