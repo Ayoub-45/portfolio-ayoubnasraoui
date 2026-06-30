@@ -9,15 +9,6 @@ WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 # Clean build variable flag for sharp
-ENV SHARP_IGNORE_GLOBAL_LIBVIPS=1
-ENV NODE_ENV production
-ENV PRODUCTION_DB=$PRODUCTION_DB
-ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
-ENV SMTP_HOST=$SMTP_HOST
-ENV ZOHO_EMAIL=$ZOHO_EMAIL
-ENV ZOHO_APP_PASSWORD=$ZOHO_APP_PASSWORD
-ENV MAIL_PORT=$MAIL_PORT
-
 RUN npm install --ignore-scripts --legacy-peer-deps && npm cache clean --force
 # 3. Rebuild the source code
 FROM base AS builder
@@ -26,6 +17,14 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Payload requires production env vars or dummy strings during build
 ENV NODE_ENV production
+
+ENV NODE_ENV=production
+ENV PRODUCTION_DB="postgres://user:pass@localhost:5432/dummy"
+ENV PAYLOAD_SECRET="build-time-placeholder-secret"
+ENV SMTP_HOST="localhost"
+ENV ZOHO_EMAIL="placeholder@example.com"
+ENV ZOHO_APP_PASSWORD="placeholder"
+ENV MAIL_PORT="587"
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
