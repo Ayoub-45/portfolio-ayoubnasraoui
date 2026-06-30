@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FadeUp from './FadeUp'
 import HeroButtons from './HeroButtons' // Client component interaction layer
-
+const dynamic = 'force-dynamic'
 export default async function Hero() {
   // 1. Initialize Payload Local Querying Engine
   const payload = await getPayload({ config })
@@ -115,7 +115,10 @@ export default async function Hero() {
 
             {/* Terminal Panel Content Workspace */}
             {/* Added overflow-x-auto so the docker stats table doesn't break layout on tiny phone screens */}
-            <div className="p-6 font-mono text-xs leading-loose overflow-x-auto whitespace-nowrap lg:whitespace-normal" style={{ color: 'var(--text)' }}>
+            <div
+              className="p-6 font-mono text-xs leading-loose overflow-x-auto whitespace-nowrap lg:whitespace-normal"
+              style={{ color: 'var(--text)' }}
+            >
               <Line prompt="ayoub@devops" cmd="whoami --json" />
               <span style={{ color: 'var(--muted)', paddingLeft: '1rem', display: 'block' }}>
                 {'{'}
@@ -184,7 +187,14 @@ function MetaItem({ icon, label }: { icon: React.ReactNode; label: string }) {
 
 function PinIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
       <circle cx="12" cy="10" r="3" />
     </svg>
@@ -193,7 +203,14 @@ function PinIcon() {
 
 function GradIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
       <path d="M6 12v5c3 3 9 3 12 0v-5" />
     </svg>
