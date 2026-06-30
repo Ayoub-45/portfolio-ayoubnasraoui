@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FadeUp from './FadeUp'
 import ContactCards from './ContactCards' // Our client interaction wrapper
-
+const dynamic = 'force-dynamic'
 export default async function Contact() {
   // 1. Initialize the Payload local querying engine
   const payload = await getPayload({ config })

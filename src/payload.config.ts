@@ -2,7 +2,6 @@ import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer' // <-- Add this import// 1. IMPORT ALL YOUR COLLECTIONS AND GLOBALS HERE
 import { Profile } from './collections/Profile' // adjust paths to your files
 import { Experiences } from './collections/Experiences'
@@ -16,6 +15,7 @@ import { Inquiries } from './collections/Inqueries'
 import { Services } from './collections/Services'
 import { Media } from './collections/Media'
 import { WorkflowSteps } from './collections/WorkflowSteps'
+console.log('PRODUCTION_DB =', process.env.PRODUCTION_DB)
 export default buildConfig({
   admin: {
     user: 'users', // Payload's default auth collection
@@ -47,7 +47,7 @@ export default buildConfig({
     defaultFromAddress: 'noreply@ayoub-devops.com',
     defaultFromName: 'Ayoub DevOps',
     transportOptions: {
-      host: process.env.HOST,
+      host: process.env.SMTP_HOST,
       port: 587,
       auth: {
         user: process.env.ZOHO_EMAIL,

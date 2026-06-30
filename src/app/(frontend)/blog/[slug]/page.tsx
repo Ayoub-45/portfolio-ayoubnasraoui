@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { notFound } from 'next/navigation'
 import BlogPostClient from '../../components/BlogPostClient'
-
+const dynamic = 'force-dynamic'
 interface PageProps {
   params: Promise<{ slug: string }>
 }
