@@ -122,7 +122,7 @@ export default function HowItWorksPage() {
 
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
-              href="/#inquiry-section"
+              href="/#contact"
               className="rounded bg-[var(--text)] px-6 py-3 text-sm font-medium text-[var(--bg)] transition-colors hover:bg-[var(--accent)] hover:text-white"
             >
               Get Started
