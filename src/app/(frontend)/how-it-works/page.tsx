@@ -4,8 +4,6 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import type { Media } from '@/payload-types'
 import { WorkflowStep as WorkflowStepType } from 'payload-types'
-const dynamic = 'force-dynamic'
-const payload = await getPayload({ config })
 export const metadata = {
   title: 'How It Works - Infrastructure & DevOps Solutions',
   description:

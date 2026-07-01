@@ -1,8 +1,8 @@
+export const dynamic = 'force-dynamic'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FadeUp from './FadeUp'
 import HeroButtons from './HeroButtons' // Client component interaction layer
-const dynamic = 'force-dynamic'
 export default async function Hero() {
   // 1. Initialize Payload Local Querying Engine
   const payload = await getPayload({ config })
