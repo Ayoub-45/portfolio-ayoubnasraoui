@@ -1,6 +1,5 @@
 # 1. Swap from node:24-alpine to node:24-slim (Debian)
-FROM node:24-slim AS base
-
+FROM node:20-slim AS base
 # 2. Setup the deps stage using standard Debian architecture
 FROM base AS deps
 WORKDIR /app
