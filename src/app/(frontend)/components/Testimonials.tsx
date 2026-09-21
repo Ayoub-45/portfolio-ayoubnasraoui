@@ -1,8 +1,8 @@
+export const dynamic = 'force-dynamic'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FadeUp from './FadeUp'
 import TestimonialsClient from './TestiimonialsClient'
-export const dynamic = 'force-dynamic'
 export default async function Testimonials() {
   const payload = await getPayload({ config })
 

@@ -1,8 +1,8 @@
+export const dynamic = 'force-dynamic'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import ProjectCard from './ProjectCard'
 import FadeUp from './FadeUp'
-export const dynamic = 'force-dynamic'
 export default async function Projects() {
   // 1. Initialize the Payload querying engine
   const payload = await getPayload({ config })

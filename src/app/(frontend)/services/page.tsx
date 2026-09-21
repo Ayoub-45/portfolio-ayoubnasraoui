@@ -1,9 +1,8 @@
 export const dynamic = 'force-dynamic'
+export const revalidate = 3600 // Cache for 1 hour via ISR
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import ServicesClient from '../components/ServicesClient'
-
-export const revalidate = 3600 // Cache for 1 hour via ISR
 
 export default async function ServicesPage() {
   const payload = await getPayload({ config })

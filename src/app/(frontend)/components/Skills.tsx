@@ -1,7 +1,7 @@
+export const dynamic = 'force-dynamic'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FadeUp from './FadeUp' // Adjust path to your FadeUp file if necessary
-export const dynamic = 'force-dynamic'
 export default async function Skills() {
   // 1. Initialize the Payload engine
   const payload = await getPayload({ config })
