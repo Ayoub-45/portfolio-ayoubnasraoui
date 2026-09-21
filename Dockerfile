@@ -19,12 +19,6 @@ COPY . .
 ENV NODE_ENV production
 
 ENV NODE_ENV=production
-ENV PRODUCTION_DB="postgres://user:pass@localhost:5432/dummy"
-ENV PAYLOAD_SECRET="build-time-placeholder-secret"
-ENV SMTP_HOST="localhost"
-ENV ZOHO_EMAIL="placeholder@example.com"
-ENV ZOHO_APP_PASSWORD="placeholder"
-ENV MAIL_PORT="587"
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
