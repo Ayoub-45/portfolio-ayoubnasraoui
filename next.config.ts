@@ -8,7 +8,7 @@ const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
   output: 'standalone',
-  skipTrailingSlashRedirect: true,
+  skipTrailingSlashRedirect: false,
   images: {
     remotePatterns: [
       {
