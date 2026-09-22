@@ -4,7 +4,7 @@ import config from '@/payload.config'
 import FadeUp from './FadeUp'
 export default async function Experience() {
   const payload = await getPayload({ config })
-  const experienceData = await payload.find({ collection: 'experiences', sort: '-createdAt' })
+  const experienceData = await payload.find({ collection: 'experiences', sort: '-startDate' })
   const sorted = experienceData.docs.sort((a, b) => {
     const aPresent = a.date?.toLowerCase().includes('present')
     const bPresent = b.date?.toLowerCase().includes('present')
