@@ -22,7 +22,6 @@ function WorkflowStep({
 }) {
   const image = item.image as Media // safe cast since depth:1 resolves it
   const dynamicImageSrc = image?.url || 'https://placehold.co/600x400/png?text=No+Image'
-  console.log('dynamicImageSrc =', dynamicImageSrc)
   const altText = image?.alt || item.title
   return (
     <article
