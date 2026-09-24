@@ -1,7 +1,5 @@
 'use client'
-
 import Link from 'next/link'
-import FadeUp from './FadeUp'
 
 export default function BlogPostClient({ post, formattedDate, computedCategory, readingTime }) {
   const renderBlockContent = (block, blockIndex) => {
@@ -85,46 +83,42 @@ export default function BlogPostClient({ post, formattedDate, computedCategory, 
         </Link>
       </div>
 
-      <FadeUp delay={50}>
-        <div
-          className="flex items-center gap-3 font-mono text-xs mb-4 mt-6"
-          style={{ color: 'var(--muted)' }}
-        >
-          <span style={{ color: 'var(--accent)' }}>●</span>
-          <span>{computedCategory}</span>
-          <span>•</span>
-          <span>{formattedDate}</span>
-          <span>•</span>
-          <span>{readingTime}</span>
-        </div>
+      <div
+        className="flex items-center gap-3 font-mono text-xs mb-4 mt-6"
+        style={{ color: 'var(--muted)' }}
+      >
+        <span style={{ color: 'var(--accent)' }}>●</span>
+        <span>{computedCategory}</span>
+        <span>•</span>
+        <span>{formattedDate}</span>
+        <span>•</span>
+        <span>{readingTime}</span>
+      </div>
 
-        <h1
-          className="font-serif leading-tight mb-6"
-          style={{
-            fontSize: 'clamp(2.25rem, 5vw, 3.3rem)',
-            fontWeight: 400,
-            color: 'var(--text)',
-          }}
-        >
-          {post.title}
-        </h1>
+      <h1
+        className="font-serif leading-tight mb-6"
+        style={{
+          fontSize: 'clamp(2.25rem, 5vw, 3.3rem)',
+          fontWeight: 400,
+          color: 'var(--text)',
+        }}
+      >
+        {post.title}
+      </h1>
 
-        <div
-          style={{ borderBottom: '1px solid var(--border)', width: '100%', marginBottom: '2.5rem' }}
-        />
-      </FadeUp>
+      <div
+        style={{ borderBottom: '1px solid var(--border)', width: '100%', marginBottom: '2.5rem' }}
+      />
 
-      <FadeUp delay={100}>
-        <div className="w-full class-blog-body">
-          {post.content?.length ? (
-            post.content.map((block, i) => renderBlockContent(block, i))
-          ) : (
-            <h3 className="text-sm italic text-center py-8" style={{ color: 'var(--muted)' }}>
-              No content available
-            </h3>
-          )}
-        </div>
-      </FadeUp>
+      <div className="w-full class-blog-body">
+        {post.content?.length ? (
+          post.content.map((block, i) => renderBlockContent(block, i))
+        ) : (
+          <h3 className="text-sm italic text-center py-8" style={{ color: 'var(--muted)' }}>
+            No content available
+          </h3>
+        )}
+      </div>
     </article>
   )
 }
